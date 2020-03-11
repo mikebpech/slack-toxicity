@@ -39,7 +39,7 @@ app.post('/toxicity', async (req, res) => {
         url: response_url,
         data: {
           response_type : "in_channel",
-          text : `${text} is ${score}% toxic... :|`
+          text : `${text} is **${score}% toxic**... :|`
         }
       })
       return res.status(200);
