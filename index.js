@@ -42,6 +42,7 @@ app.post('/toxicity', async (req, res) => {
           text : `${text} is **${score}% toxic**... :|`
         }
       })
-      return res.status(200);
     }
+
+    return res.status(200);
 })
