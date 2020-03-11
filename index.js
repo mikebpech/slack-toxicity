@@ -29,7 +29,10 @@ app.use((req, res, next) => {
 app.post('/toxicity', async (req, res) => {
     const { response_url, text } = req.body;
 
-    res.status(200);
+    axios.request({
+      method: 'POST',
+      url: response_url,
+    })
     const result = await perspective.analyze(text);
     console.log(JSON.stringify(result, null, 2));
     if (result.attributeScores) {
