@@ -28,11 +28,8 @@ app.use((req, res, next) => {
 
 app.post('/toxicity', async (req, res) => {
     const { response_url, text } = req.body;
-
-    axios.request({
-      method: 'POST',
-      url: response_url,
-    })
+    
+    res.statusCode(200);
     const result = await perspective.analyze(text);
     console.log(JSON.stringify(result, null, 2));
     if (result.attributeScores) {
@@ -48,7 +45,7 @@ app.post('/toxicity', async (req, res) => {
               "type": "section",
               "text": {
                 "type": "mrkdwn",
-                "text": "mikel left the following toxicity rating for: " + text
+                "text": `mikel left the following toxicity rating for: *${text}*`
               }
             },
             {
