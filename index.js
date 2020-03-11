@@ -3,6 +3,7 @@ const app = require('express')();
 const { PERSPECTIVE_TOKEN } = require('./config');
 const Perspective = require('perspective-api-client');
 const perspective = new Perspective({ apiKey : PERSPECTIVE_TOKEN });
+const axios = require('axios');
 
 let server;
 server = require('http').createServer(app);
@@ -30,4 +31,16 @@ app.post('/toxicity', async (req, res) => {
 
     const result = await perspective.analyze(text);
     console.log(JSON.stringify(result, null, 2));
+    if (result.attributeScores) {
+      const score = result.attributeScores['TOXICITY'].summaryScore.value;
+      console.log(score);
+      axios.request({
+        method: 'POST',
+        url: response_url,
+        data: {
+          response_type : "in_channel",
+          text : `${text} is ${score}% toxic... :|`
+        }
+      })
+    }
 })
