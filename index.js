@@ -43,7 +43,25 @@ app.post('/toxicity', async (req, res) => {
         url: response_url,
         data: {
           response_type : "in_channel",
-          text : `mikel says ${text} is <b>${score}% toxic</b>... :|`
+          blocks: [
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "mikel left the following toxicity rating for: " + text
+              }
+            },
+            {
+              "type": "section",
+              "block_id": "section789",
+              "fields": [
+                {
+                  "type": "mrkdwn",
+                  "text": `*Toxicity Rating*\n${score}`
+                }
+              ]
+            }
+          ]
         }
       })
     }
