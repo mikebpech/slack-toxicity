@@ -42,10 +42,13 @@ app.post('/toxicity', async (req, res) => {
           response_type : "in_channel",
           blocks: [
             {
+              'type': 'divider'
+            },
+            {
               "type": "section",
               "text": {
                 "type": "mrkdwn",
-                "text": `mikel left the following toxicity rating for: *${text}*`
+                "text": `*mikel* left the following toxicity rating for: *${text}*`
               }
             },
             {
@@ -57,7 +60,10 @@ app.post('/toxicity', async (req, res) => {
                   "text": `*Toxicity Rating*\n${score}`
                 }
               ]
-            }
+            },
+            {
+              'type': 'divider'
+            },
           ]
         }
       })
