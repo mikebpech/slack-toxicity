@@ -11,8 +11,6 @@ server.listen(3100);
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
-
-
 app.use((req, res, next) => {
   // Set CORS headers so that the React SPA is able to communicate with this server
   
@@ -27,6 +25,9 @@ app.use((req, res, next) => {
     next();
   });
 
-app.post('/toxicity', (req, res) => {
-    console.log(req.body);
+app.post('/toxicity', async (req, res) => {
+    const { response_url, text } = req.body;
+
+    const result = await perspective.analyze(text);
+    console.log(JSON.stringify(result, null, 2));
 })
