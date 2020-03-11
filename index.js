@@ -23,6 +23,6 @@ app.use((req, res, next) => {
     next();
   });
 
-app.get('/toxicity', (req, res) => {
+app.post('/toxicity', (req, res) => {
   console.log(req.body);
 })
