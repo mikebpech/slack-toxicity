@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 app.post('/toxicity', async (req, res) => {
     const { response_url, text } = req.body;
     
-    res.status(200).send({ text: '' });
+    res.status(200).send({ text: 'Fetching toxicity level...' });
     const result = await perspective.analyze(text);
     console.log(JSON.stringify(result, null, 2));
     if (result.attributeScores) {
