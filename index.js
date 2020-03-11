@@ -1,8 +1,13 @@
 const bodyParser = require('body-parser');
 const app = require('express')();
+const { PERSPECTIVE_TOKEN } = require('./config');
+const Perspective = require('perspective-api-client');
+const perspective = new Perspective({ apiKey : PERSPECTIVE_TOKEN });
 
 let server;
 server = require('http').createServer(app);
+
+server.listen(3100);
 
 app.use((req, res, next) => {
   // Set CORS headers so that the React SPA is able to communicate with this server
@@ -19,5 +24,5 @@ app.use((req, res, next) => {
   });
 
 app.get('/toxicity', (req, res) => {
-  console.log(req);
+  console.log(req.body);
 })
