@@ -24,5 +24,5 @@ app.use((req, res, next) => {
   });
 
 app.post('/toxicity', (req, res) => {
-  console.log(req.body);
+  console.log(req);
 })
